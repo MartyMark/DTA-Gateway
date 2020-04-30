@@ -1,0 +1,24 @@
+## ------ Grundeinstellungen ------
+server:
+   port: 8081
+   error:
+      include-stacktrace: always
+      
+spring:
+   application:
+      name: dta-gateway
+      
+##------ Eureka Discovery ------
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      register-with-eureka: true
+      fetch-registry: true
+   instance:
+      preferIpAddress: true
+
+##------ Loadbalancing ------
+ribbon:
+   eureka: 
+      enabled: true
