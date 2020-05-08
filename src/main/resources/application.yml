@@ -22,3 +22,12 @@ eureka:
 ribbon:
    eureka: 
       enabled: true
+      
+##------ Gateway ------
+security: 
+   basic: 
+      enabled: false
+      
+## https://stackoverflow.com/questions/39102980/zuul-eureka-server-basic-authentication-issue
+zuul:
+   sensitiveHeaders: Cookie,Set-Cookie
