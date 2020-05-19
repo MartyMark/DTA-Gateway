@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
+
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+
 import gateway.logger.Logger;
 
 public class ServiceExceptionFilter extends ZuulFilter {
@@ -58,8 +61,6 @@ public class ServiceExceptionFilter extends ZuulFilter {
 				//Server Error werden geloggt
 				if (is500ServerError(ctx)) {
 					String exception = json.get(STACKTRACE).getAsString().split("\\r\\n")[0];
-					
-					//Applicationname aus dem Requestpfad localhost:8080/acriba/ || localhost:8080/zas/
 					String applicationName = ctx.getRequest().getRequestURI().split("/")[1].toUpperCase();
 					Logger.error(applicationName + " - Fehler: " + exception, json.get(STACKTRACE).getAsString());
 				}
