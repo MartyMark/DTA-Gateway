@@ -45,7 +45,8 @@ public class ServiceExceptionFilter extends ZuulFilter {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		if (is500ServerError(ctx)) {
 			if(isZuulError(ctx)) {
-				Logger.error(ctx.getThrowable().getCause() != null ? ctx.getThrowable().getCause() : ctx.getThrowable());
+				Logger.error(ctx.getThrowable().getCause() != null ? 
+						ctx.getThrowable().getCause() : ctx.getThrowable());
 			}else if(isClientError(ctx)) {
 				handleClientError(ctx);
 			}
